@@ -17,14 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25p-Ou-9zg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25p-Ou-9zg">
                                 <rect key="frame" x="20" y="129" width="280" height="419"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQN-wy-01G">
-                                <rect key="frame" x="114" y="55" width="92" height="30"/>
+                                <rect key="frame" x="114" y="84" width="92" height="30"/>
                                 <state key="normal" title="Import Image"/>
                                 <connections>
                                     <action selector="imageImporter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hsq-xf-Gnx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-gh-UYN">
+                                <rect key="frame" x="23" y="20" width="74" height="30"/>
+                                <state key="normal" title="Pause App"/>
+                                <connections>
+                                    <action selector="pauseApp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8tV-6C-kTf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZg-UJ-r2U">
+                                <rect key="frame" x="195" y="20" width="85" height="30"/>
+                                <state key="normal" title="Restore App"/>
+                                <connections>
+                                    <action selector="restoreApp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kq0-8r-0XI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -32,7 +46,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="importedImage" destination="25p-Ou-9zg" id="i0H-dS-OhP"/>
+                        <outlet property="importedImage" destination="25p-Ou-9zg" id="ZDI-g2-seN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

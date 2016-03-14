@@ -10,8 +10,38 @@
 import UIKit
 import Parse
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet weak var importedImage: UIImageView!
+    
+    //Add activity indicators for spinners and alerts.
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    // Called as soon as an image has been chosen.
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        //Gets rid of UIImagePickerController
+        self.dismissViewControllerAnimated(true, completion: nil)
+        importedImage.image = image
+    }
+    
+    
+    @IBAction func pauseApp(sender: AnyObject) {
+        
+        //Make a spinner.
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        //Set it in the center of the screen.
+        activityIndicator.center = self.view.center
+        //Disappear when pause is stopped.
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        // Add it to the view.
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    @IBAction func restoreApp(sender: AnyObject) {
+    }
 
     @IBAction func imageImporter(sender: UIButton) {
         //Manages the process of picking an image
@@ -25,7 +55,22 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.presentViewController(image, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var importedImage: UIImageView!
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +79,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         
         /*
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
+
         let product = PFObject(className: "Products")
         product["name"] = "Pizza"
         product["description"] = "Vegetarian!"
@@ -62,8 +105,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 print(object!.objectForKey("description"))
             }
         })
-    }
+
 */
+    }
+
 
 }
 

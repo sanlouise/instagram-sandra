@@ -293,6 +293,7 @@
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.parse.ParseStarterProject-Swift";
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 			};
 			name = Debug;
@@ -308,6 +309,7 @@
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.parse.ParseStarterProject-Swift";
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 			};
 			name = Release;
