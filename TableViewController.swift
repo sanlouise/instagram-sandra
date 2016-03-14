@@ -14,14 +14,14 @@ class TableViewController: UITableViewController {
     // Arrays to later import data from Parse
     var usernames = [""]
     var userIDs = [""]
-    //Store follower-followed users. Boolean, either true of false.
+    //Store follower-followed users in dictionary. Boolean, either true of false.
     var isFollowing = ["":false]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Retrieve users from Parse.
-        var query = PFUser.query()
+        let query = PFUser.query()
         // Find every user.
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             // Check if objects exists.
@@ -93,7 +93,7 @@ class TableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         // Add names as how they are stored.
         cell.textLabel?.text = usernames[indexPath.row]
         let followedObjectId = userIDs[indexPath.row]
@@ -130,8 +130,8 @@ class TableViewController: UITableViewController {
             isFollowing[followedObjectId] = false
             // Get rid of the checkmark when unfollowing a user.
             cell.accessoryType = UITableViewCellAccessoryType.None
-            
-            var query = PFQuery(className: "followers")
+            // Remove follower from Parse.
+            let query = PFQuery(className: "followers")
             query.whereKey("follower", equalTo: PFUser.currentUser()!.objectId!)
             query.whereKey("following", equalTo: userIDs[indexPath.row])
             query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
