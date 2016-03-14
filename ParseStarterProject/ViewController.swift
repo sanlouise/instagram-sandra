@@ -78,6 +78,8 @@ class ViewController: UIViewController {
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 if error == nil {
                     // Signup successful.
+                    //Perform the segue to the navigation controller.
+                    self.performSegueWithIdentifier("login", sender: self)
                 } else {
                     // Signup unsuccessful.
                     //Unwrap and cast the error into a string.
@@ -94,6 +96,7 @@ class ViewController: UIViewController {
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     if user != nil {
                         // Logged In!
+                        self.performSegueWithIdentifier("login", sender: self)
                     } else {
                         if let errorString = error!.userInfo["error"] as? String {
                             errorMessage = errorString
@@ -125,8 +128,18 @@ class ViewController: UIViewController {
             signupActive = true
             
         }
-        
     }
+        
+        func viewDidAppear(animated: Bool) {
+            
+            //Test whether user is logged in, then jump to next view.
+            if PFUser.currentUser() != nil {
+                self.performSegueWithIdentifier("login", sender: self)
+                
+            }
+            
+            
+        }
 
 }
 
