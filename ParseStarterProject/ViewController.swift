@@ -26,6 +26,12 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     
+    @IBAction func createAlert(sender: AnyObject) {
+        // Setting up the alert message.
+        let alert = UIAlertController(title: "Hello!", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+
+    }
+    
     @IBAction func pauseApp(sender: AnyObject) {
         
         //Make a spinner.
