@@ -21,17 +21,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     //Add activity indicators for spinners and alerts.
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    // To switch between sign up/ sign in view.
+    var signupActive = true
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    // Make keyboard disappear when user clicks outside of text field.
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    func displayAlert(title: String, message: String) {
+        //Create alert.
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction((UIAlertAction(title: "Got it!", style: .Default, handler: { (action) -> Void in
+            //Get rid of the alert.
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })))
+        //Display the alert
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     @IBAction func signUp(sender: UIButton) {
         
         // Error message if details are incorrect.
         if username.text == "" || passwordField.text == "" {
             
-            displayAlert("Oops, something went wrong!", message: "Please enter a valid username and password.")
+            displayAlert("Error in form", message: "Please enter a username and password")
             
         } else {
-            
             //Create spinner
             activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
             //Position it.
@@ -63,9 +84,7 @@ class ViewController: UIViewController {
                     // Signup unsuccessful.
                     //Unwrap and cast the error into a string.
                     if let errorString = error!.userInfo["error"] as? String {
-                        
                         errorMessage = errorString
-
                     }
                     self.displayAlert("Signup Failed", message: errorMessage)
                 }
@@ -74,30 +93,29 @@ class ViewController: UIViewController {
         
     }
     @IBAction func logIn(sender: UIButton) {
+        //In case user sees signup mode.
+        if signupActive == true {
+            //Then switch to login mode.
+            pageTitle.text = "Log In"
+            signInUp.setTitle("Log In", forState: UIControlState.Normal)
+            switchSignInUp.setTitle("Sign Up", forState: UIControlState.Normal)
+            switchLabel.text = "Or sign up."
+            // Switch to login mode.
+            signupActive = false
+        } else {
+        //In case user sees login mode.
+        if signupActive == false {
+            pageTitle.text = "Sign Up"
+            signInUp.setTitle("Sign Up", forState: UIControlState.Normal)
+            switchSignInUp.setTitle("Log In", forState: UIControlState.Normal)
+            switchLabel.text = "Already have an account?"
+            // Switch to signup mode.
+            signupActive = true
+            
+        }
+        
     }
-    
-    func displayAlert(title: String, message: String) {
-        //Create alert.
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction((UIAlertAction(title: "Got it!", style: .Default, handler: { (action) -> Void in
-            //Get rid of the alert.
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })))
-        //Display the alert
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
-    // Make keyboard disappear when user clicks outside of text field.
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
 
 }
 
-
+}
