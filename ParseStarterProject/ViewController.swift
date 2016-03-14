@@ -49,9 +49,7 @@ class ViewController: UIViewController {
         
         // Error message if details are incorrect.
         if username.text == "" || passwordField.text == "" {
-            
             displayAlert("Error in form", message: "Please enter a username and password")
-            
         } else {
             //Create spinner
             activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
@@ -65,19 +63,19 @@ class ViewController: UIViewController {
             activityIndicator.startAnimating()
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             
+            var errorMessage = "Oops, something went wrong. Please try again later."
+
+            if signupActive == true {
+            //Sign Up Code.
             //Create the user.
-            var user = PFUser()
+            let user = PFUser()
             user.username = username.text
             user.password = passwordField.text
-            var errorMessage = "Oops, something went wrong. Please try again later."
-            
             user.signUpInBackgroundWithBlock({ (success, error) -> Void in
-                
                 // Eitherway, stop animation.
                 self.activityIndicator.stopAnimating()
                 // Make app interactive again.
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                
                 if error == nil {
                     // Signup successful.
                 } else {
@@ -89,8 +87,22 @@ class ViewController: UIViewController {
                     self.displayAlert("Signup Failed", message: errorMessage)
                 }
             })
+            } else {
+                
+                PFUser.logInWithUsernameInBackground(username.text!, password: passwordField.text!, block: { (user, error) -> Void in
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    if user != nil {
+                        // Logged In!
+                    } else {
+                        if let errorString = error!.userInfo["error"] as? String {
+                            errorMessage = errorString
+                        }
+                        self.displayAlert("Failed Login", message: errorMessage)
+                    }
+                })
+            }
         }
-        
     }
     @IBAction func logIn(sender: UIButton) {
         //In case user sees signup mode.
