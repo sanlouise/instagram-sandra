@@ -14,9 +14,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
 
     @IBAction func imageImporter(sender: UIButton) {
-        
-        
-        
+        //Manages the process of picking an image
+        let image = UIImagePickerController()
+        // Set delegate to VC.
+        image.delegate = self
+        // Just change PhotoLibrary to Camera to take photos.
+        image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        // Disallows users to edit their photo prior to importing.
+        image.allowsEditing = false
+        self.presentViewController(image, animated: true, completion: nil)
     }
     
     @IBOutlet weak var importedImage: UIImageView!
