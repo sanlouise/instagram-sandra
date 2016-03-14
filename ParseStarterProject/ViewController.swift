@@ -38,9 +38,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // Add it to the view.
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        // Ensure that the user can't do anything while the spinner is active.
+        //UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     }
     
     @IBAction func restoreApp(sender: AnyObject) {
+        // Ensure the spinner stops.
+        activityIndicator.stopAnimating()
+        // Reactivate the app.
+        //UIApplication.sharedApplication().endIgnoringInteractionEvents()
     }
 
     @IBAction func imageImporter(sender: UIButton) {
