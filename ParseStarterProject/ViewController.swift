@@ -59,10 +59,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
 */
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 
