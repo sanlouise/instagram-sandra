@@ -13,6 +13,10 @@ import Parse
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var switchLabel: UILabel!
+    @IBOutlet weak var signInUp: UIButton!
+    @IBOutlet weak var switchSignInUp: UIButton!
+    @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     //Add activity indicators for spinners and alerts.
@@ -23,6 +27,8 @@ class ViewController: UIViewController {
         
         // Error message if details are incorrect.
         if username.text == "" || passwordField.text == "" {
+            
+            displayAlert("Oops, something went wrong!", message: "Please enter a valid username and password.")
             
         } else {
             
@@ -61,10 +67,8 @@ class ViewController: UIViewController {
                         errorMessage = errorString
 
                     }
-                    
+                    self.displayAlert("Signup Failed", message: errorMessage)
                 }
-                
-                
             })
         }
         

@@ -69,7 +69,11 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="pageTitle" destination="R8a-WY-szb" id="ztf-rv-R1P"/>
                         <outlet property="passwordField" destination="3bV-kq-02T" id="zpf-kg-qqp"/>
+                        <outlet property="signInUp" destination="mei-Uk-Rc2" id="Myb-zs-X9I"/>
+                        <outlet property="switchLabel" destination="EA9-GZ-c0g" id="Zv5-oP-ok6"/>
+                        <outlet property="switchSignInUp" destination="Ymx-7m-TYZ" id="Uvy-Jg-5QV"/>
                         <outlet property="username" destination="j0i-jf-NW8" id="e7q-0i-og0"/>
                     </connections>
                 </viewController>
