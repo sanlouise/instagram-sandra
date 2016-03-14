@@ -23,15 +23,9 @@ class ViewController: UIViewController {
         
         // Error message if details are incorrect.
         if username.text == "" || passwordField.text == "" {
-            //Create alert.
-            let alert = UIAlertController(title: "Oops!", message: "Please enter a valid username and password.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction((UIAlertAction(title: "Got it!", style: .Default, handler: { (action) -> Void in
-                //Get rid of the alert.
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })))
-            //Display the alert
-            self.presentViewController(alert, animated: true, completion: nil)
+            
         } else {
+            
             //Create spinner
             activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
             //Position it.
@@ -43,10 +37,50 @@ class ViewController: UIViewController {
             //activate activityIndicator
             activityIndicator.startAnimating()
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            
+            //Create the user.
+            var user = PFUser()
+            user.username = username.text
+            user.password = passwordField.text
+            var errorMessage = "Oops, something went wrong. Please try again later."
+            
+            user.signUpInBackgroundWithBlock({ (success, error) -> Void in
+                
+                // Eitherway, stop animation.
+                self.activityIndicator.stopAnimating()
+                // Make app interactive again.
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                if error == nil {
+                    // Signup successful.
+                } else {
+                    // Signup unsuccessful.
+                    //Unwrap and cast the error into a string.
+                    if let errorString = error!.userInfo["error"] as? String {
+                        
+                        errorMessage = errorString
+
+                    }
+                    
+                }
+                
+                
+            })
         }
         
     }
     @IBAction func logIn(sender: UIButton) {
+    }
+    
+    func displayAlert(title: String, message: String) {
+        //Create alert.
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction((UIAlertAction(title: "Got it!", style: .Default, handler: { (action) -> Void in
+            //Get rid of the alert.
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })))
+        //Display the alert
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
