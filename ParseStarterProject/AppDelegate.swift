@@ -28,19 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()
         
-        var keys: NSDictionary?
-        
-        if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        }
-        if let dict = keys {
-            let applicationId = keys?["parseApplicationId"] as? String
-            let clientKey = keys?["parseClientKey"] as? String
-            
-            // Initialize Parse.
-            Parse.setApplicationId(applicationId!, clientKey: clientKey!)
-        }
 
+        
+        Parse.initializeWithConfiguration(parseConfiguration)
 
         // ****************************************************************************
         // Uncomment and fill in with your Parse credentials:

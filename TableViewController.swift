@@ -16,9 +16,9 @@ class TableViewController: UITableViewController {
     var userIDs = [""]
     //Store follower-followed users in dictionary. Boolean, either true of false.
     var isFollowing = ["":false]
+    var refresher: UIRefreshControl!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func refresh() {
         
         // Retrieve users from Parse.
         let query = PFUser.query()
@@ -62,18 +62,35 @@ class TableViewController: UITableViewController {
                                     
                                     //Reload data in table. Place it here so, not outside, so that the isFollowing can be run beforehand.
                                     self.tableView.reloadData()
+                                    // End refreshing when pulled down if the data is updated.
+                                    self.refresher.endRefreshing()
                                     
                                 }
- 
+                                
                             })
                         }
                     }
                 }
-
+                
             }
-
+            
         })
 
+
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Refresh user list when the view is dragged downwards.
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull down to refresh")
+        // Run the refresh function when someone has pulled the table down.
+        refresher.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refresher)
+        refresh()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cLS-DP-nHF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Sandra_Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -85,7 +85,7 @@
         <!--All Users-->
         <scene sceneID="YK9-Kb-JrZ">
             <objects>
-                <tableViewController id="ee4-ST-By0" customClass="TableViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ee4-ST-By0" customClass="TableViewController" customModule="Sandra_Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HIA-aT-g9z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,12 +105,67 @@
                             <outlet property="delegate" destination="ee4-ST-By0" id="V5I-yY-soq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Users" id="jEQ-t0-k4a"/>
+                    <navigationItem key="navigationItem" title="All Users" id="jEQ-t0-k4a">
+                        <barButtonItem key="rightBarButtonItem" title="Post Image" id="qt8-SI-Kon">
+                            <connections>
+                                <segue destination="cLS-DP-nHF" kind="show" id="209-QM-85Q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rAN-Kq-ybU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="666" y="230"/>
+        </scene>
+        <!--Post Image-->
+        <scene sceneID="35z-Vo-jdq">
+            <objects>
+                <viewController title="Post Image" id="cLS-DP-nHF" customClass="PostImageViewController" customModule="Sandra_Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lv9-gQ-gPm"/>
+                        <viewControllerLayoutGuide type="bottom" id="8xs-7N-nLz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x6R-xn-7dM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="addphoto" translatesAutoresizingMaskIntoConstraints="NO" id="caZ-uq-j6b">
+                                <rect key="frame" x="94" y="143" width="133" height="133"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="What's the story behind this photo?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hNj-ny-6JJ">
+                                <rect key="frame" x="20" y="340" width="280" height="76"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfy-8Q-qub">
+                                <rect key="frame" x="109" y="292" width="96" height="30"/>
+                                <state key="normal" title="Pick an Image"/>
+                                <connections>
+                                    <action selector="pickAnImage:" destination="cLS-DP-nHF" eventType="touchUpInside" id="EQA-QH-DUq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ld9-MR-pZF">
+                                <rect key="frame" x="106" y="435" width="109" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Post Image"/>
+                                <connections>
+                                    <action selector="postAnImage:" destination="cLS-DP-nHF" eventType="touchUpInside" id="qci-6z-TGO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91214346885681152" green="0.97368305921554565" blue="0.92408591508865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="imageTextField" destination="hNj-ny-6JJ" id="y5n-8j-k23"/>
+                        <outlet property="newImage" destination="caZ-uq-j6b" id="Z15-UE-7W7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="svK-WX-at0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039" y="230"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3KJ-2w-FXp">
@@ -130,4 +185,7 @@
             <point key="canvasLocation" x="287" y="230"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="addphoto" width="256" height="256"/>
+    </resources>
 </document>
