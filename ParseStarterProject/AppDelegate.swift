@@ -28,7 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()
         
-
+        let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
+            ParseMutableClientConfiguration.applicationId = "sandra-instagram"
+            ParseMutableClientConfiguration.clientKey = "Sandra123Sandra123"
+            ParseMutableClientConfiguration.server = "https://sandra-instagram.herokuapp.com/parse"
+        })
         
         Parse.initializeWithConfiguration(parseConfiguration)
 
