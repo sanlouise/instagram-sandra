@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cLS-DP-nHF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sj2-hI-eqR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -82,6 +83,71 @@
             </objects>
             <point key="canvasLocation" x="-78" y="230"/>
         </scene>
+        <!--Your Feed-->
+        <scene sceneID="Gkv-ZJ-bQ2">
+            <objects>
+                <tableViewController title="Your Feed" id="sj2-hI-eqR" customClass="FeedTableViewController" customModule="Sandra_Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="235" sectionHeaderHeight="28" sectionFooterHeight="28" id="jRX-0j-Wpz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="235" id="76L-Ba-VCj" customClass="cell" customModule="Sandra_Instagram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="235"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="76L-Ba-VCj" id="0WK-iW-5Lv">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="234.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4k5-zT-X9v">
+                                            <rect key="frame" x="26" y="8" width="268" height="145.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv0-xt-MAF">
+                                            <rect key="frame" x="26" y="161" width="268" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRk-Nr-7aR">
+                                            <rect key="frame" x="13" y="182" width="294" height="52.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fRk-Nr-7aR" firstAttribute="top" secondItem="xv0-xt-MAF" secondAttribute="bottom" id="14X-zE-IGu"/>
+                                        <constraint firstItem="xv0-xt-MAF" firstAttribute="top" secondItem="4k5-zT-X9v" secondAttribute="bottom" constant="7.5" id="3z4-cn-iV8"/>
+                                        <constraint firstItem="xv0-xt-MAF" firstAttribute="top" secondItem="4k5-zT-X9v" secondAttribute="bottom" constant="7.5" id="5hf-Rg-djD"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="fRk-Nr-7aR" secondAttribute="bottom" constant="-8" id="7Ll-yf-Ikv"/>
+                                        <constraint firstItem="fRk-Nr-7aR" firstAttribute="top" secondItem="xv0-xt-MAF" secondAttribute="bottom" id="Bde-JT-Xnl"/>
+                                        <constraint firstItem="xv0-xt-MAF" firstAttribute="leading" secondItem="0WK-iW-5Lv" secondAttribute="leadingMargin" constant="18" id="Bpa-iv-Kvr"/>
+                                        <constraint firstItem="4k5-zT-X9v" firstAttribute="top" secondItem="0WK-iW-5Lv" secondAttribute="topMargin" id="ICu-nq-OCQ"/>
+                                        <constraint firstItem="fRk-Nr-7aR" firstAttribute="leading" secondItem="0WK-iW-5Lv" secondAttribute="leadingMargin" constant="5" id="YUb-UW-k1z"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fRk-Nr-7aR" secondAttribute="trailing" constant="5" id="blo-or-o4o"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4k5-zT-X9v" secondAttribute="trailing" constant="18" id="dfK-hP-gR1"/>
+                                        <constraint firstItem="4k5-zT-X9v" firstAttribute="leading" secondItem="0WK-iW-5Lv" secondAttribute="leadingMargin" constant="18" id="saV-Mg-21M"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xv0-xt-MAF" secondAttribute="trailing" constant="18" id="xjw-ax-H2Y"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageTextField" destination="fRk-Nr-7aR" id="jEu-Oy-WfR"/>
+                                    <outlet property="postedImage" destination="4k5-zT-X9v" id="9aG-HP-YFc"/>
+                                    <outlet property="userName" destination="xv0-xt-MAF" id="6Oa-6r-R7A"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sj2-hI-eqR" id="IuV-bf-YQz"/>
+                            <outlet property="delegate" destination="sj2-hI-eqR" id="K3F-z3-BmE"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oyf-BA-ysM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="666" y="-402"/>
+        </scene>
         <!--All Users-->
         <scene sceneID="YK9-Kb-JrZ">
             <objects>
@@ -106,6 +172,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Users" id="jEQ-t0-k4a">
+                        <barButtonItem key="leftBarButtonItem" title="Feed" id="qw9-qe-A7a">
+                            <connections>
+                                <segue destination="sj2-hI-eqR" kind="show" id="ns7-Ca-6bu"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post Image" id="qt8-SI-Kon">
                             <connections>
                                 <segue destination="cLS-DP-nHF" kind="show" id="209-QM-85Q"/>
