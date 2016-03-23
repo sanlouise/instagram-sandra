@@ -24,14 +24,14 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     func displayAlert(title: String, message: String) {
-        //Create alert.
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction((UIAlertAction(title: "Got it!", style: .Default, handler: { (action) -> Void in
-            //Get rid of the alert.
+        
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
         })))
-        //Display the alert
         self.presentViewController(alert, animated: true, completion: nil)
+        
+        
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
@@ -63,9 +63,8 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
         post ["imageFile"] = imageFile
         post.saveInBackgroundWithBlock{(success, error) -> Void in
             self.activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
 
-            
             if error == nil {
                 self.displayAlert("Yay!", message: "Your photo was posted successfully.")
                 self.newImage.image = UIImage(named: "addphoto")

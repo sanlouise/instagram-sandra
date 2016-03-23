@@ -91,18 +91,15 @@ class FeedTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! cell
+        //Retrieve the image.
         imageFiles[indexPath.row].getDataInBackgroundWithBlock { (data, error) -> Void in
-            if let downloadedImage = UIImage(data: data!) {
-                myCell.newImage.image = downloadedImage
+            if let downloadImage = UIImage(data: data!) {
+                myCell.postedImage.image = downloadImage
                 
             }
             
         }
-        
-        
-        
         myCell.userName.text = usernames[indexPath.row]
-        
         myCell.imageTextField.text = imageTextFields[indexPath.row]
         
         return myCell
