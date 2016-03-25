@@ -11,6 +11,8 @@ import Parse
 
 class PostImageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    var keyboardOnScreen = false
+    
     @IBOutlet weak var newImage: UIImageView!
     @IBOutlet weak var imageTextField: UITextView!
     @IBAction func pickAnImage(sender: AnyObject) {
@@ -93,38 +95,40 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
     
     
 
-    // MARK: Keyboard functionality
+    // MARK: Show/Hide Keyboard
     
-    // Make keyboard disappear when user clicks outside of text field.
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
+    func keyboardWillShow(notification: NSNotification) {
+        if !keyboardOnScreen {
+            view.frame.origin.y -= keyboardHeight(notification)
+        }
     }
     
-    // Make keyboard disappear when user clicks on return.
-    func textFieldShouldReturn(imageTextField: UITextView) -> Bool {
-        imageTextField.resignFirstResponder()
-        return true
+    func keyboardWillHide(notification: NSNotification) {
+        if keyboardOnScreen {
+            view.frame.origin.y += keyboardHeight(notification)
+        }
     }
     
-    // Get the keyboard height from the notification’s userInfo dictionary:
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardOnScreen = true
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardOnScreen = false
+    }
+    
+    private func keyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
     }
     
-    func keyboardWillShow(notification: NSNotification){
-        view.frame.origin.y = 0.0
-        if self.imageTextField.isFirstResponder() {
-            view.frame.origin.y = getKeyboardHeight(notification) * -1
+    private func resignIfFirstResponder(textField: UITextField) {
+        if textField.isFirstResponder() {
+            textField.resignFirstResponder()
         }
     }
     
-    func keyboardWillHide(notification: NSNotification){
-        if imageTextField.isFirstResponder() {
-            view.frame.origin.y = 0
-        }
-    }
 
     
 }
