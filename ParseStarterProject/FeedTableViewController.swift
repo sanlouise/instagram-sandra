@@ -20,7 +20,7 @@ class FeedTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Access all users in the database.
-        var query = PFUser.query()
+        let query = PFUser.query()
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             
             if let users = objects {
@@ -38,21 +38,21 @@ class FeedTableViewController: UITableViewController {
             }
             
             // Find out who the active user is following.
-            var followedUsersQuery = PFQuery(className: "followers")
+            let followedUsersQuery = PFQuery(className: "followers")
             followedUsersQuery.whereKey("follower", equalTo: PFUser.currentUser()!.objectId!)
             followedUsersQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
                 if let objects = objects {
                     for object in objects {
-                        var followedUser = object["following"] as! String
+                        let followedUser = object["following"] as! String
                         
                         // Get the posts from the followed users.
-                        var query = PFQuery(className: "Post")
+                        let query = PFQuery(className: "Post")
                         query.whereKey("userID", equalTo: followedUser)
                         query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                             if let objects = objects {
                                 for object in objects {
                                     
-                                    // Append all the details to the three arrays used to store the information.
+                                    // Append all the user details to the three arrays used to store the information.
                                     self.usernames.append(self.users[object["userID"] as! String]!)
                                     self.imageTextFields.append(object["message"] as! String)
                                     self.imageFiles.append(object["imageFile"] as! PFFile)
@@ -63,19 +63,12 @@ class FeedTableViewController: UITableViewController {
  
                         })
                     }
-                    
                 }
             }
         })
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
+    // Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -104,7 +97,6 @@ class FeedTableViewController: UITableViewController {
         
         return myCell
     }
-    
     
     /*
     // Override to support conditional editing of the table view.

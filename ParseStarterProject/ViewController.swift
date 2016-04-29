@@ -24,11 +24,6 @@ class ViewController: UIViewController {
     // To switch between sign up/ sign in view.
     var signupActive = true
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // Make keyboard disappear when user clicks outside of text field.
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
@@ -46,7 +41,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signUp(sender: UIButton) {
-        
         // Error message if details are incorrect.
         if username.text == "" || passwordField.text == "" {
             displayAlert("Error in form", message: "Please enter a username and password")
@@ -107,6 +101,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func logIn(sender: UIButton) {
         //In case user sees signup mode.
         if signupActive == true {
@@ -135,12 +130,7 @@ class ViewController: UIViewController {
             //Test whether user is logged in, then jump to next view.
             if PFUser.currentUser() != nil {
                 self.performSegueWithIdentifier("login", sender: self)
-                
             }
-            
-            
         }
-
-}
-
+    }
 }

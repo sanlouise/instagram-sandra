@@ -12,52 +12,46 @@ import Parse
 class PostImageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var keyboardOnScreen = false
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        // Image is set in the var above.
+        newImage.image = image
+    }
     
     @IBOutlet weak var newImage: UIImageView!
     @IBOutlet weak var imageTextField: UITextView!
     @IBAction func pickAnImage(sender: AnyObject) {
-        var image = UIImagePickerController()
+        let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         image.allowsEditing = false
         self.presentViewController(image, animated: true, completion: nil)
     }
     
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
-    func displayAlert(title: String, message: String) {
-        
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-        
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        // image is set in the var above.
-        newImage.image = image
-    }
-    
-    
     @IBAction func postAnImage(sender: AnyObject) {
-        
-        //Position it.
+        //Position the activity indicator.
         activityIndicator.center = self.view.center
-        //Hide when stopped.
+        //Hide it when stopped.
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         view.addSubview(activityIndicator)
-        //activate activityIndicator
+        //Activate activity indicator.
         activityIndicator.startAnimating()
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
         
         // We'll need access to the image, message and user ID associated with the object.
         // Create a class on the fly, can only be done when importing Parse
-        var post = PFObject(className: "Post")
+        let post = PFObject(className: "Post")
         post["message"] = imageTextField.text
         post ["userID"] = PFUser.currentUser()!.objectId!
         let imageData = UIImageJPEGRepresentation(newImage.image!, 9.9)
@@ -76,10 +70,8 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
                self.displayAlert("Oops!", message: "Something went wrong.")
                 
             }
-
         }
     }
-    
     
     // NSNotification objects encapsulate information so that it can be broadcast to other objects by an NSNotificationCenter object.
     // The app signs up to be notified when the keyboard is showing.
@@ -92,11 +84,8 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-    
-    
 
-    // MARK: Show/Hide Keyboard
-    
+    // Show/Hide Keyboard
     func keyboardWillShow(notification: NSNotification) {
         if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
@@ -128,7 +117,4 @@ class PostImageViewController: UIViewController, UINavigationControllerDelegate,
             textField.resignFirstResponder()
         }
     }
-    
-
-    
 }
